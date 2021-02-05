@@ -1,0 +1,7 @@
+.col-6.check {
+    display: flex;
+}
+
+.col-6.check .form-check:nth-child(2) {
+    margin-left: 20px;
+}
