@@ -36,14 +36,12 @@ formEl.addEventListener('submit', evt => {
         result.classList.add('alert-danger');
         showData(result, dataForm);
         return;
-        return;
     }
     result.classList.remove('alert-danger');
     showData(result, dataForm);
 });
 
 growthEl.addEventListener('invalid', evt => {
-    console.log(evt);
     const { value } = evt.target;
     
     if (growthEl.validity.patternMismatch) {
