@@ -32,8 +32,13 @@ formEl.addEventListener('submit', evt => {
     if (+weight < 10) weightEl.setCustomValidity("Вес – должен быть более 10 кг");
 
     const dataForm = Number.isNaN(formulIMT(+weight, +growth)) ? "Ошибка, ожидалось число" : formulIMT(+weight, +growth);
-    if (!Number.isNaN(dataForm)) result.classList.toggle('alert-danger');
-
+    if (!Number.isNaN(dataForm)) {
+        result.classList.add('alert-danger');
+        showData(result, dataForm);
+        return;
+        return;
+    }
+    result.classList.remove('alert-danger');
     showData(result, dataForm);
 });
 
