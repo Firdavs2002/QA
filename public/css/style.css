@@ -5,3 +5,62 @@
 .col-6.check .form-check:nth-child(2) {
     margin-left: 20px;
 }
+
+header#header {
+    padding: 0 !important;
+    background-color: #99CEDB;
+}
+
+header h5#main__title {
+    padding: 5px;
+    margin: 0;
+    border: 1px solid #8CC8D7;
+    border-radius: 0;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+}
+
+header h5#main__title .icon__arrow_down {
+    transform: rotate(180deg) !important;
+}
+
+header .flex__header {
+    display: flex;
+    justify-content: space-between;
+}
+
+main {
+    background-color: #EAF5F8;
+}
+
+main .header__title h6 {
+    text-transform: uppercase;
+    background-color: #D5EBF1;
+    border-radius: 0;
+    color: #43A0BF;
+    margin: 10px 0;
+    padding: 5px 20px;
+    letter-spacing: 3px;
+    border: none;
+
+}
+
+main .body__form {
+    background-color: #EAF5F8;
+}
+
+main .body__form form {
+    background-color: inherit;
+    border: none;
+    color: #28A6D1;
+    font-size: 0.8rem;
+}
+
+main .body__form form sup {
+    color: #333
+}
+
+main .body__form form input {
+    border: 1px solid #96E0F2;
+}

@@ -1,9 +1,15 @@
-function formulIMT(m, p) {
-    return Math.floor((m / (p ** 2)) + 1)
-}
+const formulIMT = (m, p) => Math.floor(m / ((p / 100) ** 2)) + 1
 
-function showData(showEl, data) {
-    showEl.textContent = `ИМТ = ${data}`;
+function showData(showEl, data, err = false) {
+    const { valid } = err || false;
+
+    if (valid === "valid-weight")
+        return showEl.textContent = `Вес – должен быть более 10 кг.`;
+    
+    if (valid === "valid-growth")
+        return showEl.textContent = `Рост – не менее 160 см.`;
+    
+    return showEl.textContent = `ИМТ = ${data}`;
 }
 
 let sec = 0, unicUnd;
@@ -25,38 +31,28 @@ const formEl = document.querySelector('.form-control'),
 formEl.addEventListener('submit', evt => {
     evt.preventDefault();
     
-    
     const weight = weightEl.value,
           growth = growthEl.value;
 
-    if (+weight < 10) weightEl.setCustomValidity("Вес – должен быть более 10 кг");
+    const [newWeight] = weight.match(/\d+/),
+          [newGrowth] = growth.match(/\d+/);
 
-    const dataForm = Number.isNaN(formulIMT(+weight, +growth)) ? "Ошибка, ожидалось число" : formulIMT(+weight, +growth);
-    if (!Number.isNaN(dataForm)) {
+    if (newWeight < 10 && newWeight > 0) {
         result.classList.add('alert-danger');
-        showData(result, dataForm);
+        showData(result, dataForm, {valid: 'valid-weight'});
         return;
     }
-    result.classList.remove('alert-danger');
-    showData(result, dataForm);
-});
-
-growthEl.addEventListener('invalid', evt => {
-    const { value } = evt.target;
     
-    if (growthEl.validity.patternMismatch) {
-        if (+value < 160 && +value > 0) {
-            growthEl.setCustomValidity("Рост не может быть меньше 160 см");
-            return;
-        }
-        growthEl.setCustomValidity("Неверно указены данные");
-    } else if (growthEl.validity.valueMissing) {
-        growthEl.setCustomValidity("Это поле объязательно");
+    if (newGrowth < 160) {
+        result.classList.add('alert-danger');
+        showData(result, dataForm, {valid: 'valid-growth'});
         return;
     }
-    else {
-        growthEl.setCustomValidity("");
-        growthEl.validity.customError = false;
-        return
-    }
-}, false);
+
+    const dataForm = formulIMT(+newWeight, +newGrowth);
+
+    result.classList.remove('alert-danger');
+    result.classList.add('alert-primary');
+    showData(result, dataForm);
+    return;    
+});
